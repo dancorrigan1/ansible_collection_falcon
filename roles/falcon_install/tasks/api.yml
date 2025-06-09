@@ -44,8 +44,9 @@
   ansible.builtin.set_fact:
     falcon_sensor_version: "+version:'{{ falcon_sensor_version }}'"
   when:
-    - falcon_sensor_update_policy_name is not defined
-    - falcon_sensor_version is defined and falcon_sensor_version | length > 0
+    # - falcon_sensor_update_policy_name is not defined
+    - falcon_sensor_version is defined
+    - falcon_sensor_version | length > 0
 
 - name: "CrowdStrike Falcon | Build API Sensor Query"
   ansible.builtin.set_fact:
