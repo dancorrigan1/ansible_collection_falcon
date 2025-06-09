@@ -44,7 +44,7 @@
   ansible.builtin.set_fact:
     falcon_os_query:
       "os:'{{ falcon_target_os }}'+os_version:'{{ falcon_os_version }}'\
-      {{ falcon_os_arch | default('') }}+version:'{{ falcon_sensor_version | default('')' }}"
+      {{ falcon_os_arch | default('') }}+version:'{{ falcon_sensor_version | default('') }}'"
 
 - name: CrowdStrike Falcon | Get list of filtered Falcon sensors
   crowdstrike.falcon.sensor_download_info:
