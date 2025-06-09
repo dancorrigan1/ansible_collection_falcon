@@ -40,19 +40,11 @@
       ansible.builtin.set_fact:
         falcon_sensor_version: "+version:'{{ falcon_sensor_update_policy_package_version }}'"
 
-- name: "CrowdStrike Falcon | Override falcon_sensor_version with version supplied from variables"
-  ansible.builtin.set_fact:
-    falcon_sensor_version: "+version:'{{ falcon_sensor_version }}'"
-  when:
-    # - falcon_sensor_update_policy_name is not defined
-    - falcon_sensor_version is defined
-    - falcon_sensor_version | length > 0
-
 - name: "CrowdStrike Falcon | Build API Sensor Query"
   ansible.builtin.set_fact:
     falcon_os_query:
       "os:'{{ falcon_target_os }}'+os_version:'{{ falcon_os_version }}'\
-      {{ falcon_os_arch | default('') }}{{ falcon_sensor_version | default('') }}"
+      {{ falcon_os_arch | default('') }}+version:'{{ falcon_sensor_version | default('')' }}"
 
 - name: CrowdStrike Falcon | Get list of filtered Falcon sensors
   crowdstrike.falcon.sensor_download_info:
